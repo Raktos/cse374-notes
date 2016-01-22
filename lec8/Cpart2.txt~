@@ -1,0 +1,13 @@
+void swap(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp
+}
+int x = 17;
+int y = 42;
+swap(&x, &y);
+
+C does not have a native boolean type
+just use an int, require 0 as false, anything else as true. Use 1 tho don't be a retard.
+

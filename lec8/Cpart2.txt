@@ -1,0 +1,84 @@
+void swap(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp
+}
+int x = 17;
+int y = 42;
+swap(&x, &y);
+
+C does not have a native boolean type
+just use an int, require 0 as false, anything else as true. Use 1 tho don't be a retard.
+
+ARRAYS:
+
+Java syntax.
+mostly.
+int arr[10];
+arr[0];
+arr[1] = 7;
+
+Arrays in C are actually pointers.
+
+arr;
+pointer to first element in array.
+arr == &arr[0]
+evaluate to true
+
+int *parr = arr;
+*parr == arr[0]
+true
+
+*(parr + 1) == arr[1]
+true
+
+arr[i] == *(arr + i)
+true
+
+parr++
+parr now points to the next array slot
+
++ 1 points to the next int sized thing, for an int array, would be different for a double array
+
+THERE IS NO PROTECTION. You can go ahead and point to memory after the array's allocation if you want. Be careful though.
+Very bad if you try and point to memory outside what you're allowed to read at this point of the program. Prolly crash.
+
+STRING:
+
+it's just an array of chars.
+yeah ok we get it
+
+char s[15]
+max length 15 string
+
+convention for end of string is marked with a character of value 0.
+This DOES NOT need to be at the end of the array, it's the end of the string. The "String" is just holding onto memory just in case the string gets longer
+0 is the null terminator.
+
+0 is null in C.
+
+"\0" is the character value 0
+(i remember seeing that before actually)
+
+We can use string literals though cause reasons.
+it's an auto string.
+
+"hello" -> ['h'|'e'|'l'|'l'|'o'|'\0']
+
+
+C PROGRAMS:
+
+voodoo incantation for main method.
+
+int main(int argc, char **argv)
+
+argc is how many arguments are provided
+argv is the values of those arguments
+     It is a double pointer because it points to an array of arrays (array of strings)
+     could be written as char *argv[] if you wanted.
+     It would be dumb but you could.
+     argv[0] is always the name of the executable, name of the program.
+
+
+He wrote a program, watch the video if you need it.
