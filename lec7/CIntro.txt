@@ -1,0 +1,73 @@
+Oh boy C intro to C. Fantastic.
+
+same control flow
+{}
+;
+if
+for
+while
+switch
+
+operations in C are more similar to what the computer is actually doing, rather than abstracted
+"low level" language
+
+we end up doing more ourselves. Memory management etc.
+
+procedural language
+no objects or classes etc. the ususal
+all computation happens inside functions
+basic unit is not a class, it is a function
+
+data types
+integer
+	int (4byte)
+	char (1byte)
+	short int (2bytes)
+	long int (8bytes)
+	signed/unsigned
+
+floating point
+	 float (4bytes)
+	 double (8byes)
+	 long double (16bytes)
+
+arrays
+	magic
+	get to this later
+
+structs
+	classes except really not
+
+MEMORY
+I KNOW. I KNOW HOW MEMORY WORKS OK?
+Uh. Wait. we're gonna write a memory manager ok great now I actually have to know this
+
+memory split into cells
+cell is a "word" (4bits)
+a way to refer to cell in memory (mem address)
+These little shites are just numbered. NUMBERSSSS
+WHY AMI EVEN TAKINGS FSNOTES ON THIS
+Oh look the picture of memory. fantastic.
+what is 2^64 btw?
+1.84e19
+that is a large number.
+2.3 exabytes. yikes.
+
+aww shit we can store memory addresses in variables wooo
+wait I fucking know that ok
+I totally did C++ memory address point array shit
+it was glorious
+Just like me
+
+int *ptr = &a
+int pointer ptr set to address of variable a
+
+yikes ok dereferencing is getting a wee bit convoluted
+why is the syntax the same going more than one direction pls no
+
+PRACTICE
+ptr = &b;
+vs
+*ptr = b;
+
+this shit is magic.

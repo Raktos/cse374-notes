@@ -1,0 +1,43 @@
+Oh boy C intro to C. Fantastic.
+
+same control flow
+{}
+;
+if
+for
+while
+switch
+
+operations in C are more similar to what the computer is actually doing, rather than abstracted
+"low level" language
+
+we end up doing more ourselves. Memory management etc.
+
+procedural language
+no objects or classes etc. the ususal
+all computation happens inside functions
+basic unit is not a class, it is a function
+
+data types
+integer
+	int (4byte)
+	char (1byte)
+	short int (2bytes)
+	long int (8bytes)
+	signed/unsigned
+
+floating point
+	 float (4bytes)
+	 double (8byes)
+	 long double (16bytes)
+
+arrays
+	magic
+	get to this later
+
+structs
+	classes except really not
+
+MEMORY
+I KNOW. I KNOW HOW MEMORY WORKS OK?
+Uh. Wait. we're gonna write a memory manager ok great now I actually have to know this
