@@ -1,0 +1,26 @@
+More C prolly idk.
+
+variables are just a label in code to refer to data stored in memory. After compilation they cease to exist.
+
+a ptr is a label for a bit of data in memory that refers to a different bit of data in memory. cool.
+
+ASSIGNMENT:
+left expression vs right
+left value vs right
+lvalue vs right
+
+Things behave differently depending on the side they appear on
+on the right we get value
+on the left we assign to
+
+a (assign to) = b (get value of b)
+
+left evaluates to a location
+right evaluates to the actual data
+
+okokokokokokokokok
+
+
+DANGER
+dangerous and very bad practive to return ptrs to local variables
+

@@ -1,0 +1,77 @@
+More C prolly idk.
+
+variables are just a label in code to refer to data stored in memory. After compilation they cease to exist.
+
+a ptr is a label for a bit of data in memory that refers to a different bit of data in memory. cool.
+
+ASSIGNMENT:
+left expression vs right
+left value vs right
+lvalue vs right
+
+Things behave differently depending on the side they appear on
+on the right we get value
+on the left we assign to
+
+a (assign to) = b (get value of b)
+
+left evaluates to a location
+right evaluates to the actual data
+
+okokokokokokokokok
+
+
+DANGER
+dangerous and very bad practice to return ptrs to local variables
+because local variables kinda sorta cease to exist after the function finishes. Whoops. ptr to memory with no guarentees as to wtf it is. lol whoops.
+
+"stale" ptrs
+
+
+EXERCISES:
+
+What size of array would be used to store string "funtimes"
+9 minimum.
+
+Definition to the follow C function:
+returns an int
+length of string we pass in.
+
+// my version
+int strlen(char *s) {
+    int i = 0;
+    char c = s;
+
+    while(c != '\0') {
+    	    i++;
+	    c++;
+    }
+    return i;
+}
+
+// this shit is cool, didn't know you could do for loops like this.
+int strlen(char *s) {
+    int count = 0;
+    for (; s[count] != '\0'; count++) {}
+    return count;
+}
+
+THIS IS IMPORTANT SHIT
+EVERY PARAMETER IN C IS PASSED BY VALUE (COPIED)
+THIS IS WHY WE USE POINTERS SOMETIMES, THEN WE CAN CHANGE VALUE OF THING AT POINTER (though our ptr is a copy) LOCATION AND HAVE IT STICK.
+
+int srtlen(char *s) {
+    int count = 0;
+    for (; *s != '\0'; s++) {
+    	count++;
+    }
+}
+
+
+Declaration and definition are actually seperate.
+I remember reading about this
+You can declare a function anywhere, then define is somewhere else.
+
+All function declarations happen at the top of the file, the the definition happens later (after main for example)
+function prototypes.
+
