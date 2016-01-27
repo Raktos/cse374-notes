@@ -1,0 +1,103 @@
+arrays are ptrs to the first element of an array oh boy I know we did that last time.
+
+OH MAN HW HELP TOOLS YEAH
+
+CLint
+Checks C Style in a file.
+cool.
+
+gdb
+debugger magic shit
+hunt down segmentation faults which give the wonderful error "there was a segmentation fault somwhere sometime probably"
+see reference sheet
+
+
+STRUCTS OH BOY
+
+struct point {
+       int x;
+       int y;
+};
+
+struct point p;
+p.x = 2;
+p.y = 3;
+
+CANNOT give default values to struct variables
+
+struct point makePoint(int x, int y) {
+       struct point p;
+       p.x = x;
+       p.y = y;
+
+       return p;
+}
+
+
+EXERCISE OH BOY
+
+struct string {
+       int length;
+       char *str;
+};
+
+
+we don't have to write "struct" all the time. using a special C construct called typedef OH MAN MAGIC SHIT.
+
+Makes aliases for existing types
+
+after defining point struct...
+
+typedef struct point Point;
+
+Point p; Just like a class. mostly. sort of. not really but whatev.
+
+typedef struct point {
+	int x;
+	int y;
+} Point;
+
+WOO ALL IN ONE GO.
+
+lowercase point up there can actually be omitted usually.
+unless you want recursion. then you need the little lowercase bit.
+
+EXERCISE 2
+
+Point addPoint(Point a, Point b) {
+      Point c;
+      c.x = a.x + b.x;
+      c.y = a.y + b.y;
+
+      return c;
+}
+
+structs can contain structs.
+
+OH BOY COMPLEX SHIT HERE WE GO.
+rectangle defined by corners as points
+
+arrays of structs also legal
+
+ptrs to structs
+gotta dereference them to get the ontents tho.
+
+arrow syntax to get member
+
+pp is a pointer to a point struct
+
+pp->x get real x
+(*pp).x does the same thing
+
+EXERCISE
+bank account struct
+
+typedef struct {
+	char *name;
+	int accountNum;
+	double balance;
+} Account;
+
+void addToAccount(double value, Account *acct) {
+     acct->balance += value;
+}
