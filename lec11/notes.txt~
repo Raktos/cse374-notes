@@ -1,0 +1,16 @@
+if you make a linked list shit can get real.
+
+struct node {
+       int data;
+       struct node next;
+}
+
+that shit won't compile, incomplete type with an infinite amount of required memory
+
+struct node {
+       int data;
+       struct node *next;
+}
+
+Better, at least we know how big the pointers are. Will compile, still gonna be bad shit though.
+

@@ -1,0 +1,108 @@
+if you make a linked list shit can get real.
+
+struct node {
+       int data;
+       struct node next;
+}
+
+that shit won't compile, incomplete type with an infinite amount of required memory
+
+struct node {
+       int data;
+       struct node *next;
+}
+
+Better, at least we know how big the pointers are. Will compile, still gonna be bad shit though.
+
+
+for example imagine a reursive function to calculate a factorial
+WE GONNA BLOW THE STACK. WOOOO. (or not, we're just gonna talk about memory)
+
+memory grows down cause we fill the top first. Usually.
+
+Stack frame, piece of memory for an individual function call
+it holds a return address, where the program should go once it returns this function
+local variable obvs held here too.
+
+the memoy is THE STACK. OH. MY. GOD.
+#LastInFirstOut
+
+There's a bit of memory at the bottom of this memory deal, it is called the heap. It is a blob of data that can hold things that can be used by ANYONE in the program! Yay!
+
+The head in Java is anything with the new keyword. Every object lives in the heap in Java.
+We also have a spot for all global static variables.
+Head is kinda like global dynami variables.
+
+code that we're running, the actual bits, live down there at the bottom somewheres.
+
+
+ok so what's the difference between memory in the head and memory in the stack?
+
+WELL NOW THAT YOU'VE ASKED.
+stack is magically auto-allocated.
+Must be of constant size cause the compiler's gotta do it, so it's gotta know how much space to allocate.
+
+it is also auto-deallocated btw.
+
+Heap memory is manually allocated and deallocated.
+It can be of arbitrary size
+dynamic memory, we can ask for what we need at any point.
+Say for example we want a new node in a linked list at an arbitrary time.
+
+void* malloc(size_t size)
+allocates memory. # bytes.
+be all like I WANT 1010332840329 BYTES GIMME and then crash everything but it was cool tho.
+char *s = malloc(10)
+     cool you got a pointer to a block of 10bytes. go for it.
+void* gets implicitly cast as that char*, but you can explicitly cast it too.
+      C++ REQUIRES the cast. So generally do it. As long as you know what you're doing. It can hide some errors. careful.
+      If it's never gonna get compiled in C++ forget the cast. Save some time.
+
+Ok now we've allocated a 10byte char array. We get 10 characters in there.
+
+BUT for example AN int may not be the same size on all systems.
+
+int *number = malloc(sizeof(int)) //  gets a pointer to memory for a single int.
+sizeof() is magic, it will give the number of bytes in a type.
+
+int *numbers = malloc(sizeof(int) * numInts) //  BOOM LOTS OF INTS.
+
+
+OK WHY DO WE CARE?
+We can allocate whenever the fuck we want. fun times.
+
+preferred syntax, saves needing to change code in multiple places
+sizeof is FUCKING MAGIC and can take a type or a value, if you send a value it will get the size of that too.
+
+int *numbers = malloc(numInts * sizeof(*numbers)) // OH MY GOD I SEE STARS
+
+ok now we gotta go all dealloc
+memory leaks are not fun they are literally anti-fun do not be anti-fun be fun.
+
+void free(void *ptr)
+
+this will free whatever the fuck we wanted.
+
+Don't give free() things from the stack. Really don't do that pls.
+DOn't free the same memory twice either, that will prolly freak it out. Or free memory we didn't mean to free that would be bad too. We get undefined behaviour again.
+standard lib needs to remember how big the allocation was in order to reclaim it.
+	 Done in the background, we will be doing it in HW5 when we write a memory manager.
+stdlib.h has these rather important functions.
+
+malloc can fail. This is unlikely but it can happen.
+Everytime you call malloc follow up with a check to make sure it worked. If it didn't work oh god oh god oh god please quit the program right now and find out why that fucking happened.
+
+EXERCISE:
+Point * makepoint(int x, int y) {
+      Point *p = malloc(sizeof(*p));
+      if (*p == NULL) {
+      	 kick a puppy
+      }
+      p->x = x;
+      p->y = y;
+      return p; // OH SHIT NOW WE CAN RETURN POINTERS
+}
+
+The caller is now responsible for deallocating this shit now though so don't forget.
+
+DON'T CHANGE A POINTER WITHOUT DEALLOCATING THE THING IT POINTS TO OR YOU LOSE THE REFERENCE AND CAN NEVER DEALLOCATE IT. THIS IS BAD OBVS
