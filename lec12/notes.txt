@@ -1,0 +1,70 @@
+MORE HEAP
+
+memmer the picture of memory. It's important.
+Local variable in the stack, other shit in the heap.
+
+malloc again
+       initializes to whatever the fuck was already there it doesn't do shit.
+malloc is not the only one that can do it.
+calloc(int num, int size)
+	   number of objects, size of each individual object
+	   initialized all memory to 0.
+sizeof() wooooo
+
+free()
+
+typedef struct {
+	char *str;
+	int len;
+} String;
+
+sizeof(String)
+	Oh look. It has an int and a ptr. 4 + 8 bytes.
+
+String *s = malloc(sizeof(*s));
+String *s = calloc(10, sizeof(*s));
+String *s = malloc(10 * sizeof(*s));
+
+free(s);
+
+
+HEADER FILES
+
+why could we ever want to seperate code?
+    Uh. Like a thousand reasons.
+share code between programs
+abstraction!!!!! oh boy.
+maintainable.
+readable
+wizards shit.
+compilation time
+
+header files
+struct definitions
+function prototypes
+
+how to beat include recursion
+#ifndf SOME_HEADER_H
+	if not defined
+#define SOME_HEADER_H
+//blah blah code
+#endif
+
+conditional compiltion
+
+void debug-printf(char *output) {
+#ifdef DEBUG
+     printf(output);
+#endif
+     return;
+}
+
+this is actully hella useful...
+
+gcc -D DEBUG will define DEBUG at compilation, then we get this printout. compile without it to not be in debug mode
+
+
+HW4 - TRIE
+
+ok I know what a trie is.
+
