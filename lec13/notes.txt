@@ -1,0 +1,81 @@
+MIDTERM REVIEW
+
+don't need to memorize options for various commands.
+won't need to memorize test options either
+
+SHELL
+basic shell operations
+look at all commands from first lecture
+
+familiar with redirection
+>
+>>
+<
+|
+
+command substitution
+$()
+
+you can use backticks too but it's ugly as sin
+
+man page documentation
+materials will be in that format so you better know how to read it
+
+if
+for
+while
+reading files
+processing
+args
+
+REGEX
+how to sed
+how to regex
+
+C PROGRAMMING
+ptrs
+structs
+memory model
+       stack
+       heap
+malloc
+free
+calloc
+
+
+HW4 STUFF
+
+how to orgainze code for HW4, this may be useful...
+extended example coding too so prolly go look a that later.
+
+we gonna have a trie file
+and a main file
+
+main will handle the interactive session
+it will construct the trie
+it will prompt for new input
+
+TRIE.C
+struct node
+function create
+	 creates a trie by reading input parameter
+function insert
+	 inserts a new word
+function lookup
+	 looks up something
+function destroy
+	 deallocates all heap memory being used by this trie
+lookup thing for character to number gonna be in here somewhere
+
+TRIE.H
+delcarations of all that crap
+insert may only be used inside trie.c, it may be a "private" function, and thus NOT in trie.h
+       or maybe it will be it depends (prolly not tho srsly)
+
+MAIN.C
+#include trie.h
+should not need any structs or functions prolly.
+gonna just be a single main method that does the shit it needs to do.
+
+
+linkedlist in demo.c

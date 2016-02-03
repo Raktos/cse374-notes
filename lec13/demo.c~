@@ -1,0 +1,26 @@
+// THIS IS A LINKED LIST
+// demo 3 Feb 2016
+
+#inclide "demo.h"
+
+Node* init_node() {
+  // setup a node with NULL values
+}
+
+Node* create_list() {
+  return init_node();
+}
+
+Node* add_node(Node *list, char *str) {
+  // go down list until we get to the end, then dump the node there
+  // next node is null because we said so in init_node
+  while (list->next != NULL) {
+    // move the pointer along
+    // we can do this without breaking the original list because the pointer is copied
+    // this is how we get pointer to pointer shite when we DO need to change the original
+    list = list->next;
+  }
+  list->next = init_node();
+  list->next->data = str;
+  return list->next;
+}
