@@ -1,0 +1,34 @@
+MIDTERM REVIEW
+2-3PM
+Smith Hall 2015
+Go there and do whatever really.
+
+
+COMPILATION
+file.c -> preprocessor
+  handles preprocessor directives, things with # at the start
+
+preprocessor -> pure C code
+  we are now processed and have pure C code
+
+pure C -> compiler
+  we are producing an object file, .o file
+  (we've been in single file at a time mode for the whole bit now)
+  the binary form of the pure C code
+  can reference things that are not actually defined yet cause we only done one file
+
+compiler -> .o
+  see above
+
+.o -> linker -> executable
+  takes undefined linkers in each file and replaces them with the addresses of the stuff in the other files they reference
+  we finally got to the many files at once bit.
+
+dependancy goes the other direction
+
+this dependancy can be represented with a Directed Acyclic Graph
+
+
+MAKEFILES
+all that stuff was to set up for makefiles
+scripting language, lets us program what to compile when
