@@ -1,0 +1,52 @@
+HW5 stuff
+
+It's all in the spec.
+But you know it might help to hear it here too.
+
+OS does memory stuff.
+System calls
+  fuckin magic
+  programs ask OS for stuff
+  only deal with big chunks of contiguous memory
+  brk, sbrk for linux
+
+Free List
+  Linked list of aaliable blocks of memory
+  holds size and points to next
+  held in order of memory address
+
+MEMORY ALGO
+  Go down list in order until we find a block big enough
+  if none are found get some more from OS
+
+What if block is waaaaay bigger than request?
+  Don't just give them all of it that's retarded.
+  split it into smaller blocks
+
+FREE memory
+  freeing memory can get complicated when we split it a lot
+  we need to chunk them back together when we release them
+  If it's actually adjacent to something, just combine them.
+
+struct free_block {
+  uintptr_t size; // this is going to be added to memory addresses with math so we need it to be the same size as a pointer so we can do the math properly
+  struct free_block *next;
+}
+
+this sucker is 16 bytes. We have an 8 byte pointer and an 8 byte uint thing
+each block will thus have a header of 16 bytes
+
+size refers to the size EXCLUDING the header
+
+"Oh goody a bunch of memory let me write to all of it!"
+
+return a pointer to the actual free memory bit of the block.
+don't point to the header pls.
+block location + sizeof(struct free_block)
+
+we're gonna pretend malloc is the system call. Because we're awesome.
+
+We're not gonna bother returning memory to the OS when we have tons of free.
+
+We're also not going to valgrind because we're using pointers in rather odd ways.
+
