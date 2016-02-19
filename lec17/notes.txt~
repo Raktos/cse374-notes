@@ -1,0 +1,78 @@
+freemem help:
+we need to case void* p to something we can actually manipulate.
+void* cannot do pointer arithmetic.
+we are going to cast it to something with a size of 1 byte, char*
+then we move it where it needs to go
+then we cast it as the header struct
+
+
+MATH
+base 10 is fun I guess
+
+binary is not in fact base 10
+it is base 2, no shit. bet you didn't see that shit coming
+0b prefixes binaries
+0b1010 is 1*2^3 + 0*2^2 + 1*2^1 + 0^2^0 = 8 + 2 = 10
+
+hexadecimal
+base 16
+conviently sized, 0-16 can be represented with 4 bits, half a byte
+it lines up with memory nicely
+but OH SHIT WE DON'T HAVE SINGLE DIGITS FOR ALL OF 0-15 OH NO. WHAT EVER WILL WE DO?!
+letters lol.
+a-f specifically
+prefixed with 0x
+0x0 0x1 0x2 ... 0x9 0xa 0xb 0xc 0xd 0xe 0xf 0x10
+woot.
+
+0x8 + 0x5 = 0xd
+
+0xb + 0xc
+    11 + 12 = 23
+    23 - 16 = 7
+    0x17
+
+
+HOW DO WE REPRESENT THINGS IN MEMORY?
+awesomely that's how.
+also with bits.
+6 bits? 2^6 possibilities
+magic.
+
+how about cards?
+first 2 bits are the suit
+remaining 4 bits are the card value
+52 cards fit in these 6 bits
+
+Most Signiicant Bit (leftmost)
+signed integers
+MSB is the sign indicator
+the rest are the actual value
+
+-1 = 0b1001
+1 = 0b0001
+2^3 values on each side of 0.
+
+except we have a positive 0 and a negative 0 so that's hella weird.
+arithmetic is hella weird too.
+
+4 - 3 will get us 1. fantastic.
+4 + (-3) gets us -7???!!!?!??!
+uhm.
+
+sign and magnitufe (this approach) is kinda shite.
+
+Twos Complement is how real peeps do dis shit
+MSB slot is negatively weighted
+
+0b0110 = 0*-2^3 + 1*2^2 + 1*2^1 + 0*2^0 = 4 + 2 = 6
+0b1110 = 1*-2^3 + 1*2^2 + 1*2^1 + 0*2^0 = -8 + 4 + 2 = -2
+
+only one 0 now wheeee
+we can do 4 + (-3) now too.
+the math involved wrapping cause we can't overflow.
+
+generally odd behaviour near the edges of overflow though.
+
+-1 in 8 bits
+0b1

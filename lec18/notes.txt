@@ -1,0 +1,93 @@
+BUFFER OVERFLOW
+oh goody
+hw5 help at bottom
+
+but first a little more number representation
+converting from ints to floats and shit like that can be bad.
+A rocket in 1996 send flight control information.
+it could go TOO DAMN FAST and could overflow a conversion from 64bit floats to 16bit uints.
+500million lost in the kaboom.
+be bloody careful when converting.
+Also build in some damn protection. y the fuck they just say "oh well it can't overflow so don't worry bout dat."
+
+Anyways ok buffer overflow.
+void echo() {
+  char buf[8];
+  gets(buf);
+  print(buf);
+}
+
+ok so gets could read too much shit and that would be bad.
+we gonna mess up someone else's memory
+gets doesn't bother with bounds checking so it should be used with care.
+
+what if we want to be an asshole and do this on purpose?
+
+first we need to know; how is memory laid out on stack?
+ok that stack image again.
+stackframe:
+  return address of function (where do we go when we finish?)
+  local variables (all dat crap)
+  arguments for next function call
+    if foo() calls a function bar() it copies the params to the bottom of its memory space
+    bar() then has it's own frame exactly the same but it reads the parameters from that bit at the bottom of foo()
+
+example:
+  int bar(char *arg1, char *arg2) {
+    strcpy(arg1, arg2);
+    return 0;
+  }
+
+  void foo(char *argv[]) {
+    char buf[16];
+    bar(argv[1], buf);
+  }
+
+  int main(int argc, char **argv) {
+    foo(argv);
+  }
+
+  what does stack look like?
+
+  argc
+  argv
+  main:
+    return address -> some system something or stdlib routine
+    prevframeptr -> NULL
+    thisframeptr -> this dude
+    locals:
+      none
+    call args:
+      argv
+  foo:
+    return address-> somewhere in main, where ever it was called from
+    prevframeptr -> prevframeptr of main (right after prev return address)
+    locals:
+      char buf[16] : 16 bytes
+    call args:
+      address of buf
+      argv[1] some string waaaay up there somewhere
+  bar:
+    return address -> somewhere in foo()
+    prevframeptr -> prevframeptr of foo
+    locals:
+      none
+    call args:
+      none
+  system:
+    stackptr -> stack frame
+    frameptr -> directly after return address of current frame
+
+  we can overwrite the return address of a function to run arbitrary code.
+  we prolly want code to give us root access to the machine.
+  this overwrites foo() return address, cause it goes up apparently.
+
+  DEMO TIME.
+
+
+WHERE DOES FREE_LIST ROOT RESIDE
+
+put that shit in mem_impl.h
+Just like I did coo.
+oh they're automagically initialized to default value we can get rid of all that shit in the other thing
+if freemem is used in some inconsistent state, I.E. getmem has never been called, freemem is sent NULL, freemem is sent something not created by getmem, go ahead and just return and do nothing. Is coo.
