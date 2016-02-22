@@ -1,0 +1,105 @@
+ASSEMBLY
+
+hardware <- architeture <- assembly <- languages (C etc)
+
+gcc translates C into assembly
+It will do some optimizations.
+It promises they will not change how the program works
+but you need to know assembly to check, or further optimize
+assembly is useful in working with low level systems, or catching malicious software
+
+CPU
+  -> registers (some small fixed size memory, 16-64 prolly) 1ns to access
+    -> cache (SRAM memory KB - a few MB, could be a sequence of them L1, L2, L3) 2-10ns to access
+      -> memory (DRAM memory a few GB) 40-100ns to access
+        -> disk 5-10ms, 5-10million ns to access
+
+memory is 40-100x slower than registers
+what goes into registers and when can be important
+
+CPU keeps track of some stuff.
+  PC (program counter, where to go next)
+  registers
+  condition code
+Memory has other stuff
+  data
+  code
+  stack
+
+Assembly only cacre about essentially an address table with some stuff in it
+
+registers:
+  location where the CPU can store a small amount of data and can be accessed quickly
+  no addresses, they have names
+  x86-64 ha 16 and they're all 64 bits wide
+  % prefaces regiser names
+  %rax RETURN instruction
+  %rbx
+  %rcx
+  %rsi first arg
+  %rdi second arg
+  %rsp STACK POINTER
+  %rbp
+  %r8
+  .
+  .
+  .
+  %r15
+
+these are not rules, just general guidelines.
+It's just how we tend to do it.
+
+instructions do 3 mains things
+transfer data
+perform arithmatic
+transfer control (move place in code)
+
+TRANSFER DATA:
+mov_ source, dest
+  _ is a letter of some sort
+    b 1 byte
+    w 2 bytes
+    l 4 bytes
+    q 8 bytes
+  starts with least significant, rightmost, first
+  letters are from obsolete terminology
+    byte
+    word
+    long word
+    whatever the fuck q means
+  movq %rax, %rdx
+    move all 8 bytes from rax to rdx
+  movq $0x400, %rdx
+    move the int 400 into register rdx
+      $ is a constant
+      $-533 is legal for example
+  number without $ are absolute memory addresses.
+    hella rare, memory addresses don't really tend to be absolute...
+  ptrs exist in assembly
+    (%rax) pointer dereference for rax
+
+Cannot move memory directly to other memory.
+You have to go mem->reg->new mem
+kk gotcha easy
+
+(R) - value at address R
+D(R) - values at address R + D
+
+8(%rax) offset address of rax by 8 then read data
+
+void swap (long *xp, long *yp) {
+  long t0 = *xp;
+  long t1 = *yp;
+  *xp = t1;
+  *yp = t0;
+}
+
+1st arg -> rdi
+2nd arg -> rsi
+
+movq (%rdi), %rax
+movq (%rsi), %rdx
+movq %rdx, (%rdi)
+movq %rax, (%rsi)
+ret
+
