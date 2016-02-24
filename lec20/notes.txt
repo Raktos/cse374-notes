@@ -1,0 +1,142 @@
+HW5:
+
+freemem should do nothing is the poiner it gets is NULL
+However if the pointer is not it should ASSUME it is valid, i.e. was allocated by getmem
+Fails silently if you give it something else
+
+memory in blocks is not explcitly stored anywhere per se.
+yeah yeah I know
+
+OKOKOKOKOKOKOKOK I KNOW USE GLOBALS
+
+HOW DOES BENCH?
+ntrials: for each trial do some things
+  is it a call to getmem or freemem?
+  get a random number
+  do a check based on percentage chance it is going to be free
+  if it is getmem:
+    random number if it is large or small
+    random number of actual size
+  if freemem:
+    rand target to free
+    if there is nothing allocated return
+    still counts as a trial
+every x trials update stats
+every y trials print the heap
+  or just once idk read the spec
+
+HOW DOES I ARRAY?
+make a damn array.
+dynamically allocate some large array
+everytime we add check if the array is big enough
+if it is not double the size, copy over, free old one
+or use realloc
+stack is bad idea is the idea here idea
+
+
+EXERCISE ON ASSEMBLY
+
+we got a sitrep right here
+memory:
+  address | value
+  0x100 | 0xFF
+  0x104 | 0xAB
+  0x108 | 0x13
+  0x10C | 0x11
+
+registers:
+  %rax | 0x100
+  %rcx | 0x1
+  %rdx | 0x3
+
+%rax 0x100 //value in register, which also happens to be a mem address but it's a value for the purposes of this one
+0x104 0xAB //no dollar sign means absolute mem address, which means we get the value at that address
+$0x108 0x108 //address gotten with the dollar sign, literally the thing there
+(%rax) 0xFF //take the value in the register, treat it as a mem address, dereference to get value
+4(%rax) 0xAB //same as above but 4 bytes further on
+
+D(R_b,R_i,R_s)
+D: offset (constant int)
+R_b: base register
+R_i: index register (works with s to do shit)
+S: scale, 1, 2, 4, or 8
+
+final output = R_b + S * R_i + D
+
+ok so what does this really do
+(%rax,%rdx,4)
+address starts at %rax, each thing is 4 in size, we want %rdx_th one
+
+we can do arithmatic this way too
+x + k * i or something
+(x,k,i)
+
+same memory and register values as before:
+9(%rax,%rdx) = 0x10C //SHIT, we get that address, which means it ACTUALLY evaluates to the value 0x11
+260(%rcx,%rdx) = 0x13
+  260 in hex is 0x104 //how the fuck...? ok he went the other way, got 0x100 in decimal, then saw it was 4 less
+  0x104 + 0x4 = 0x108 //this is the address we want
+0xFC(,%rcx,4) = 0xFC + 4 = 0xFF
+  0xFC + 4 means = 0x100
+  0xC + 0x4 = 0x10
+  0xF0 + 0x10 = 0x100 (0xF + 0x1 = 0x10)
+(%rax,%rdx,4)) = 0x10C->0x11
+
+
+LOAD EFFECTIVE ADDRESS
+leaq S,D
+  compute address S, store ADDRESS in D (not value)
+
+leaq (%rdx,%rcx,4), %rax
+  evaluate thing, the stick address in %rax
+  0x104 gets stuck in %rax
+  analogue to C statement:
+    p = &x
+
+compiler will also use this to do arithmatic cause it's less instructions to do it that way
+
+leaq JUST does the math, it will never go to actual memory
+
+
+ARITHMETIC
+
+unary insuction: one arg
+  incq A : A <- A + 1
+  decq A : A <- A - 1
+  negq A : A <- -A //negation under twos complement
+  notq A : A <- ~A //complement, all the bits are flipped, if 0 1 if 1 0
+
+binary instructions: two args
+  addq A,B : B <- B + A
+  subq A,B : B <- B - A
+  imulq A,B : B <- B * A
+  xorg A,B : B <- B | A etc.
+  orq
+  andq
+  salq     bit shifts
+  sarq     multply by 2, divide by 2, etc.
+
+  lookup bitshifts and reaquant with bitwise operations...
+
+PRACTCE OH BOY
+
+same memory and registers as before again
+we got a sitrep right here
+memory:
+  address | value
+  0x100 | 0xFF
+  0x104 | 0xAB
+  0x108 | 0x13
+  0x10C | 0x11
+
+registers:
+  %rax | 0x100
+  %rcx | 0x1
+  %rdx | 0x3
+
+addq %rcx,(%rax)
+  0x100 <- 0xFF + 0x1 = 0x100
+subq %rdx, 4(%rax)
+  0x104 <- 0xA8
+imulq $16, (%rax, %rdx, 4)
+incq 8(%rax)
