@@ -1,0 +1,93 @@
+ASSEMBLY
+
+ARITHMETIC
+imulq
+addq
+
+EXERCISE
+
+// C
+ans = a * b + c * d;
+
+%rxc <- a
+%rdx <- b
+%rsi <- c
+%rdi <- d
+%rax <- ans
+
+// Assembly
+imulq %rcx,%rdx
+imulq %rsi,%rdi
+addq %rdx,%rdi
+movq %rdi,%rax
+
+// load effective address version
+imulq %rcx,%rdx
+imulq %rsi,%rdi
+leaq(%rdx,%rsi),%rax
+
+EXERCISE 2
+
+// Assembly
+subq %rsi,%rdi
+movq %rdi,%rax
+shl $0x4,%rax
+addq %rdi,%rax
+
+%rsi <- a
+%rdi <- b
+
+// C
+(b - a) * 16 + (b - a)
+17 * (b - a)
+
+
+CONTROL FLOW
+jump. oh.
+sets program counter to an address
+
+jmp LOC
+just do the jump #goto 10
+
+je
+jump equal
+
+jne
+jump not equal
+
+jg
+jump greater than
+
+jl jump less than
+
+jge
+jump greater than or equal
+
+They rely on condition codes
+1 bit pieces of data
+set by the processor
+
+carry flag (CF)
+for unsigned arithmetic
+0b1111 + 0b0001
+result is 0b10000
+the fith digit was carried out beyond the most significant bit
+0b0000 - 0b0001
+goes other way
+in both of those cases the carry flag would get set off
+
+sign flag (SF)
+when result is negative
+
+overflow flag (OF)
+when we overfloooooow
+for exmple 2 pos ints add but result is neg, overflow must have occured, set flag
+
+zero flag (ZF)
+when result is 0
+
+how does this help with jump instructions?
+well the jump instructions check flags
+
+ex je
+if jump equal sees the ZF is set, then the arg subtractions was 0  so they are equal
