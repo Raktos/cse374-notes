@@ -1,0 +1,115 @@
+C++ Primer Plus
+
+g++ instead of gcc
+std=c++11 then the rest is basically the same.
+
+no .h on std library headers
+eg #include <iostream>
+
+ALL of C works in C++. coo.
+
+to get c libraries you drop the .h and put a c a the start
+#include <cstdlib>
+
+NAMESPACE
+
+when you put code in a namespace
+
+namespace funtimes {
+  ...code...
+}
+
+everything in the C++ standard library in the namespace std
+
+#include <vector>
+
+std::vector<int> vec;
+// :: is kinda like the dot in Java between package name and thing
+
+#include <iostream>
+using namesace std; // shortcut, treat the code here that if there is no namespace defined it is std
+// using namespace std::cout // gets just cout
+
+int main() {
+  cout << "hello world" << endl;
+}
+
+
+COUT
+
+std::cout << "a message" << std::endl;
+
+std::cout is an instand of an ostream object, it lets you output a stream.
+operator << is an overloaded operator
+In the case of ostream << is a method basically
+it takes a value and prints it, then returns a reference to the object it was called on
+
+so we're really invoking a method on object cout, takeing the return (the same cout) and invoking it again with endl
+
+endl gets you the endline no matter what OS we're on. Which is nice.
+
+int x;
+cin >> x;
+
+
+#include <iostream>
+using namespace std;
+
+int main() {
+  cout << "What year were you born?" << endl;
+
+  int year;
+  cin << year;
+
+  leapYearAge = (2016 - year) / 4;
+
+  cout << "You are " << leapYearAge << "leap years old" << endl;
+}
+
+
+void f(int &x) {
+  x++;
+}
+
+this will send in a pointer and modify the value at the poiter location AUTOMAGICALLY
+NO MORE MANUAL DEREFERENCING
+hope you an keep track of what is what tho.
+
+
+CONST
+(this is is C too)
+
+means a value is read only
+C++ uses const in about 5 different ways oh boy
+
+const int x = 10;
+after we make x 10, x can never be changed again
+
+pointers make it shite
+const int *p = &n
+this that p points to is a constant integer
+NOT that the pointer is read only.
+*p cannot be change
+p can change though
+
+int * const p
+now the pointer itself is constant, the int is totally normal
+
+const int * const p
+EVERYTHING IS A CONST OH MAN OH MAN
+
+int const *p is the same as const int *p
+so that's cool and not confusing at all
+
+it can also be used on properties and methods because idk why not
+
+MEMORY ALLOCATION
+same general stack heap deal
+main difference is the new keywords to do the same thing really
+
+keywords!!!
+new instead of malloc
+  int *arr = new int[10];
+  //heap allocated array of 10 ints
+
+
