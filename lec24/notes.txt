@@ -1,0 +1,13 @@
+FINAL EXAM
+
+assembly
+int representations
+  two whatever it's called
+C
+C++
+Bash
+Concurrency
+
+
+INHERITANCE + a rant
+

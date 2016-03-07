@@ -1,0 +1,8 @@
+// account implementation
+
+#include <string>
+#include "account.h"
+
+Account::Account() {
+  
+}

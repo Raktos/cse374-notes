@@ -1,0 +1,15 @@
+C++ Classes
+
+class declaration in a header file
+implementation in normal file
+
+CODING EXAMPLE SEE FILES ON WEBSITE
+
+we need to manually create a copy constructor to handle passing by value.
+
+destructor
+~ClassName();
+
+int length() const;
+does not modify the object at all
+

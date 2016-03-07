@@ -1,0 +1,88 @@
+Mult-core computing
+
+we have multiple CPUs on a microchip
+
+We can run multiple programs at the same time for example, each program gets it's own core
+
+time-slicing:
+  this was done on a singel core by swapping out a lot
+
+
+what if we want to have a single program utilize multiple cores?
+
+We're doing concurrency, parallelism is different
+
+parallelism:
+  using extra resources, like processors, to solve problems faster
+  to make our programs run faster
+  how do we structure programs and algorithms to take advvantage of these extra resources?
+Concurrency:
+  what we're focusing on
+  this is about how to efficiently manage shared resources
+  memory is a shared resource or example, multiple threads might need to share a data structure or variable
+
+something about responsiveness, processer utilization and failure isoation
+
+Oh is this gonna be concurrent reads of the same variable? It is!
+Oh boy this AGAIN.
+
+pieces of each may happen all out of order and break the hell out of everything
+
+not good.
+
+interleaving gone wrong
+
+atomic operation needs to happen
+
+mutual exclusion
+only one thread may perform this operation at any given time
+
+deposit would want one of these too
+
+critical section:
+  some term for sections of code which need to operate atomically
+
+the programmer is responsible for implementing these critical sections.
+the compiler cannot know which interleavings are ok and which are not
+
+We do need some language feature to do this though
+
+while(busy) { // loop forever while we are known to be busy }
+busy = true;
+
+// the rest of the code
+
+busy = false;
+
+stiiiiil need atomic operations
+
+MUTUAL EXCLUSION LOCK
+mutex
+
+lock is an abstract datatype
+3 operations
+
+new
+  get a new lock, initially not held
+
+aquire
+  if lock is not held by a thread hold it, otherwise wait in the damn line
+
+release
+  drop the lock
+
+we need special hardware or operating system support to make this whole lock operation atomic
+
+We need to make sure locks are in the correct places however
+we don't want to lock code that doesn't need to be locked
+
+
+RE-ENTRANT LOCKS
+
+allows a thread to reaquire a lock it already has so if a metho grabs a lock then calls a method that needs the same lock, the thread can go ahread and aquire that same lcok even though it 'already held'
+We keep a count of how many times a thread aquires a lock, and we will release it when that gets to 0. So if we aquire twice we must release twice
+
+"Data Race"
+We have a piece of data and the behaviour of our program is non-deterministic, it can be computed correctly or incorrectly depending on the order threads get to data
+they race and it can fuck up if the wrong person wins
+
