@@ -1,0 +1,53 @@
+we have a hastable and we want to change the value stored at a key but we want all other threads to think that the key was never removed
+
+u1 = table.lookup(k)
+u2 = expensive(u1)
+
+// this is atomic
+table.remove(k)
+table.insert(k,u2)
+
+Where do we put the lock?
+
+option1
+  the whole thing
+  prolly bad idea
+
+option2
+  lock and release for lookup, then lock again after expensive operation
+  well we released, we might miss an update because we didn't hold the lock while we did expensive()
+
+option3
+  modify the code cause it shite
+  do the done while loop thing around the whole option2
+  the do a check AFTER expensive to see if the table changed in the interim
+  if it did, then we gotta try again
+
+data races:
+  #spookyBehaviour
+  this can be a big problem
+
+  class C {
+   private:
+     int x = 0;
+     int y = 0;
+   public:
+     void f() {
+       x = 1;
+       y = 1;
+     }
+     void g() {
+       int a = y;
+       int b = x;
+       assert(b >= a);
+     }
+  }
+
+  the compiler can mess this up by reordering operations for optimization
+  the hardware an also muck it all up
+    cahcing and buffers might complete things in the wrong orders because what is faster
+
+  code of conduct:
+    programmer promises no data races
+    compiler and hardware then promise memory reordering will never affect the result of data race free code
+
